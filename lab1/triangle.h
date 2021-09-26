@@ -2,9 +2,8 @@
 #define TRIANGLE_H
 
 #include "figure.h"
-#include "point.h"
-
 #include <iostream>
+#include "point.h"
 
 
 class Triangle : public Figure {
@@ -16,9 +15,9 @@ public:
 
     virtual ~Triangle();
 
-    void Print();
-    double Square();
-    double Square2();
+    size_t VertexesNumber();
+    void Print(std::ostream& os);
+    double Area();
 
 private:
     double len_a, len_b, len_c;

@@ -13,7 +13,20 @@ Point::Point(std::istream &is) {
 double Point::dist(Point& other) {
   double dx = (other.x_ - x_);
   double dy = (other.y_ - y_);
-  return std::sqrt(dx*dx + dy*dy);
+  return sqrt(dx*dx + dy*dy);
+}
+
+Point Point::MidDot(Point& other) {
+  Point Mid ((other.x_ + x_)/2.0, (other.y_ + y_)/2.0);
+  return Mid; 
+}
+
+double Point::getX() {
+  return x_;
+}
+
+double Point::getY() {
+  return x_;
 }
 
 std::istream& operator>>(std::istream& is, Point& p) {

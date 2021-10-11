@@ -8,7 +8,7 @@
             "name": "(gdb) Запустить",
             "type": "cppdbg",
             "request": "launch",
-            "program": "Введите имя программы, например: ${workspaceFolder}/a.exe",
+            "program": "/mnt/c/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab2_test/a.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

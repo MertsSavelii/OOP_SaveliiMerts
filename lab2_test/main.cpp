@@ -10,8 +10,9 @@ int main()
     {
         tree.Push(a[i]);
     }
-    
-    std::cout<<tree<<std::endl;
-    //std::cout<<tree.t_root->area<<std::endl;
+    if(!tree.Empty())
+        std::cout<<tree<<std::endl;
+    else
+        std::cout<<"пусто"<<std::endl;
     return 0;
 }

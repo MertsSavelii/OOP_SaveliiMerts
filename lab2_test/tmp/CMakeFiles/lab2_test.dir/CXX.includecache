@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab2_test/main.cpp
+tree_elem.h
+/mnt/c/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab2_test/tree_elem.h
+iostream
+-
+tbinarytree.h
+/mnt/c/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab2_test/tbinarytree.h
+
+/mnt/c/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab2_test/tbinarytree.cpp
+tbinarytree.h
+/mnt/c/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab2_test/tbinarytree.h
+
+/mnt/c/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab2_test/tbinarytree.h
+iostream
+-
+tree_elem.h
+/mnt/c/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab2_test/tree_elem.h
+
+/mnt/c/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab2_test/tree_elem.cpp
+iostream
+-
+tree_elem.h
+/mnt/c/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab2_test/tree_elem.h
+
+/mnt/c/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab2_test/tree_elem.h
+iostream
+-
+

@@ -7,9 +7,11 @@
 
 class TreeElem{
     public:
-    TreeElem(Octagon val);
+    TreeElem();
+    TreeElem(Octagon octagon);
+    void TreeElemDel(TreeElem *elem);
     virtual ~TreeElem();
-    Octagon figure;
+    Octagon octi;
     int count_fig;
     TreeElem * t_left;
     TreeElem * t_right;

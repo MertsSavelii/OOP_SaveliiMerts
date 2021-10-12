@@ -1,12 +1,11 @@
 cmake_minimum_required(VERSION 3.16.3)
-project(lab2)
+project(lab2_test)
 
 set(CMAKE_CXX_STANDARD 11)
 
 
-add_executable(lab2 
+add_executable(lab2_test 
   main.cpp
-  octagon.h octagon.cpp
-  point.h point.cpp figure.h
-  tbinarytree.h tbinarytree.h
+  tbinarytree.h tbinarytree.cpp
+  tree_elem.h tree_elem.cpp
 )

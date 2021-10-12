@@ -2,14 +2,14 @@
 #include "tree_elem.h"
 
 TreeElem::TreeElem() {
-    area = -1;
+    octi;
     count_fig = 0;
     t_left = nullptr;
     t_right = nullptr;
 }
 
-TreeElem::TreeElem(int octagon) {
-    area = octagon;
+TreeElem::TreeElem(Octagon octagon) {
+    octi = octagon;
     count_fig = 1;
     t_left = nullptr;
     t_right = nullptr;

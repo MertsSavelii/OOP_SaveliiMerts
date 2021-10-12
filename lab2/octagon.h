@@ -11,10 +11,7 @@
 class Octagon : public Figure {
 public:
     Octagon();
-    Octagon(double a, double b, double c, double d, double e, double f, double g,
-            double h, Point In);
-    Octagon(std::istream &is);
-    Octagon(const Octagon& other);
+    Octagon(Point a, Point b, Point c, Point d, Point e, Point f, Point g, Point h);
 
     friend std::istream& operator>>(std::istream& is,  Octagon& obj);
     friend std::ostream& operator<<(std::ostream& os, const Octagon& obj);
@@ -27,8 +24,7 @@ public:
     bool operator==(const Octagon& other);
 
 private:
-    double len_a, len_b, len_c, len_d, len_e, len_f, len_g, len_h;
-    Point InPoint;
+    Point a_, b_, c_, d_, e_, f_, g_, h_;
 };
 
 #endif

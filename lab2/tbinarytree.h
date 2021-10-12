@@ -3,8 +3,8 @@
 
 
 #include <iostream>
-#include "octagon.h"
 #include "tree_elem.h"
+#include "octagon.h"
 
 
 // В каждой вершине двоичного дерева хранится фигура и счетчик, отражающий ее количество.
@@ -46,8 +46,6 @@ virtual ~TBinaryTree();
 
 private:
 TreeElem *t_root;
-void DeleteTree(TreeElem *root);
-
 };
 
 #endif

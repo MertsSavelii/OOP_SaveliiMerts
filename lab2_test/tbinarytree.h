@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "tree_elem.h"
+#include "octagon.h"
 
 
 // В каждой вершине двоичного дерева хранится фигура и счетчик, отражающий ее количество.
@@ -19,12 +20,12 @@ TBinaryTree(const TBinaryTree& other);
 // Если фигура совпадает с фигурой из вершины, счетчик в вершине увеличивается на 1.
 // Иначе сравнивается с вершиной из левого поддерева, если площадь фигуры < площади в вершине
 // или с вершиной правого поддерева, если >=.
-void Push(int octagon);
+void Push(Octagon octagon);
 
 // Удаление фигуры из дерева:
 // Счетчик вершины уменьшается на единицу.
 // Если счетчик становится равен 0, вершина удаляется с заменой на корректный узел поддерева.
-void Pop(int octagon);
+void Pop(Octagon octagon);
 
 // Полная очистка дерева
 void Clear();
@@ -43,7 +44,7 @@ friend std::ostream& operator<<(std::ostream& os, const TBinaryTree& tree);
 
 virtual ~TBinaryTree();
 
-//private:
+private:
 TreeElem *t_root;
 };
 

@@ -6,16 +6,13 @@
 class Point {
 public:
   Point();
-  Point(std::istream &is);
   Point(double x, double y);
-
-  double dist(Point& other);
-  Point MidDot(Point& other);//находит точку посередине двух точек
+  
   double getX();
   double getY();
   
   friend std::istream& operator>>(std::istream& is, Point& p);
-  friend std::ostream& operator<<(std::ostream& os, Point& p);
+  friend std::ostream& operator<<(std::ostream& os, const Point& p);
 
   bool operator!=(const Point& other);
 private:

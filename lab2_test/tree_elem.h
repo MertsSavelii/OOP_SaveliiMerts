@@ -3,14 +3,15 @@
 
 
 #include <iostream>
+#include "octagon.h"
 
 class TreeElem{
     public:
     TreeElem();
-    TreeElem(int octagon);
+    TreeElem(Octagon octagon);
     void TreeElemDel(TreeElem *elem);
     virtual ~TreeElem();
-    int area;
+    Octagon octi;
     int count_fig;
     TreeElem * t_left;
     TreeElem * t_right;

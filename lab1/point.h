@@ -9,8 +9,6 @@ public:
   Point(std::istream &is);
   Point(double x, double y);
 
-  double dist(Point& other);
-  Point MidDot(Point& other);//находит точку посередине двух точек
   double getX();
   double getY();
   

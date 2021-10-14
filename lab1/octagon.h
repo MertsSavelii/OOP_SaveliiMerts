@@ -1,17 +1,16 @@
 #ifndef OCTAGON_H
 #define OCTAGON_H
 
-#include "figure.h"
-#include "triangle.h"
 #include <iostream>
+
+#include "figure.h"
 #include "point.h"
 
 
 class Octagon : public Figure {
 public:
     Octagon();
-    Octagon(double a, double b, double c, double d, double e, double f, double g,
-            double h, Point In);
+    Octagon(Point a, Point b, Point c, Point d, Point e, Point f, Point g, Point h);
     Octagon(std::istream &is);
     Octagon(const Octagon& other);
 
@@ -22,8 +21,7 @@ public:
     double Area();
 
 private:
-    double len_a, len_b, len_c, len_d, len_e, len_f, len_g, len_h;
-    Point InPoint;
+    Point a_, b_, c_, d_, e_, f_, g_, h_;
 };
 
 #endif

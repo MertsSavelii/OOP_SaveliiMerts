@@ -20,7 +20,6 @@ void recursive_copying(TBinaryTree *curr, const TreeElem  *o_curr) {
 }
 
 
-
 void TBinaryTree::Push(Octagon octagon) {
     TreeElem * curr = t_root;
     while (curr)
@@ -51,7 +50,6 @@ void TBinaryTree::Push(Octagon octagon) {
         return;
     }
 }
-
 
 
 void Pop_List(TreeElem *curr, TreeElem *parent);
@@ -107,7 +105,6 @@ void Pop_List(TreeElem *curr, TreeElem *parent) {
 void Pop_Part_of_Branch(TreeElem *curr, TreeElem *parent) {
     if (curr->t_right == nullptr)
     {
-        // Вместо curr подвешивается его левое поддерево
         if(parent)
         {
             if (parent && parent->t_left == curr)
@@ -125,7 +122,6 @@ void Pop_Part_of_Branch(TreeElem *curr, TreeElem *parent) {
 
     if (curr->t_left == nullptr)
     {
-        // Вместо curr подвешивается его правое поддерево
         if(parent)
         {
             if (parent && parent->t_left == curr)
@@ -174,8 +170,6 @@ void TBinaryTree::Clear() {
     if (t_root->t_right)
         recursive_clear(t_root->t_right);
     t_root->t_right = nullptr;
-    //t_root->area = -1;
-    //t_root->count_fig = 0;
     t_root = nullptr;
 }
 
@@ -199,7 +193,6 @@ bool TBinaryTree::Empty() {
     else
         return false;
 }
-
 
 
 double recursive_counting(const double min_area, const double max_area, TreeElem *curr) ;
@@ -237,7 +230,6 @@ double recursive_counting(const double min_area, const double max_area, TreeElem
 }
 
 
-
 void Tree_out (std::ostream& os, TreeElem *curr);
 std::ostream& operator<<(std::ostream& os, const TBinaryTree& tree) {
     TreeElem *curr = tree.t_root;
@@ -263,7 +255,6 @@ void Tree_out (std::ostream& os, TreeElem *curr) {
         }
     }
 }
-
 
 
 TBinaryTree::~TBinaryTree() {

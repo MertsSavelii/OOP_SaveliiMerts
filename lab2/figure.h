@@ -10,5 +10,4 @@ public:
     virtual ~Figure() {};
 };
 
-
-#endif // FIGURE_H
+#endif 

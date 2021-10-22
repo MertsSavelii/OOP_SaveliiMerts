@@ -1,7 +1,6 @@
 #ifndef TREEELEM_H
 #define TREEELEM_H
 
-
 #include <iostream>
 #include "octagon.h"
 

@@ -1,7 +1,6 @@
 #ifndef TBINARYTREE_H
 #define TBINARYTREE_H
 
-
 #include <iostream>
 #include "tree_elem.h"
 #include "octagon.h"

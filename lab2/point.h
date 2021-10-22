@@ -20,4 +20,4 @@ private:
   double y_;
 };
 
-#endif // POINT_H
+#endif

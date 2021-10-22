@@ -1,12 +1,10 @@
 #ifndef OCTAGON_H
 #define OCTAGON_H
 
-
 #include <iostream>
 
 #include "figure.h"
 #include "point.h"
-
 
 class Octagon : public Figure {
 public:

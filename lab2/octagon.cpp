@@ -11,7 +11,6 @@ Octagon::Octagon()
      f_(0, 0),
      g_(0, 0),
      h_(0, 0) {
-    //std::cout << "Default octagon created" << std::endl;
 }
 
 Octagon::Octagon(Point a, Point b, Point c, Point d, Point e, Point f, Point g, Point h)
@@ -88,7 +87,5 @@ bool Octagon::operator==(const Octagon& other) {
     return true;
 }
 
-
 Octagon::~Octagon() {
-    //std::cout << "Octagon deleted" << std::endl;
 }

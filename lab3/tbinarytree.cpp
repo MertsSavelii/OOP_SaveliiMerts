@@ -254,5 +254,4 @@ void Tree_out (std::ostream& os, sptr(TreeElem) curr) {
 
 
 TBinaryTree::~TBinaryTree() {
-    std::cout << "дерево удалено" << std::endl;
 }

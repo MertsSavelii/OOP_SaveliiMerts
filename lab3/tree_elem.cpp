@@ -5,16 +5,16 @@
 
 TreeElem::TreeElem() {
     this->octi = nullptr;
-    count_fig = 0;
-    this->t_left = nullptr;
-    this->t_right = nullptr;
+    this->set_count_fig(0);
+    this->set_left(nullptr);
+    this->set_right(nullptr);
 }
 
 TreeElem::TreeElem(const Octagon octagon) {
-    *this->octi = octagon;
-    count_fig = 1;
-    this->t_left = nullptr;
-    this->t_right = nullptr;
+    this->set_octagon(octagon);
+    this->set_count_fig(1);
+    this->set_left(nullptr);
+    this->set_right(nullptr);
 }
 
 
@@ -47,5 +47,4 @@ void TreeElem::set_right(sptr(TreeElem) to_right) {
 
 
 TreeElem::~TreeElem() {
-    std::cout << "элемент дерева удалён" << std::endl;
 }

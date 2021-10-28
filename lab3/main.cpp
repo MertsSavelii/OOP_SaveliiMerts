@@ -18,11 +18,5 @@ int main()
     std::cout << tree << std::endl;
     tree.Clear();
     std::cout << tree << std::endl;
-    
-    /*TBinaryTree biba(tree);
-    tree.Clear();
-    std::cout << std::make_shared<TBinaryTree> (biba); 
-    std::cout << std::endl << std::make_shared<TBinaryTree> (tree);
-    std::cout << std::endl;*/
     return 0;
 }

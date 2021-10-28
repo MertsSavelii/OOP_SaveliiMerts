@@ -4,7 +4,7 @@ TBinaryTree::TBinaryTree() {
     t_root = nullptr;
 }
 
-void recursive_copying(TBinaryTree *curr, const sptr(TreeElem)  o_curr);
+/*void recursive_copying(TBinaryTree *curr, const sptr(TreeElem)  o_curr);
 TBinaryTree::TBinaryTree(const TBinaryTree& other) {
     recursive_copying(this, other.t_root);
 }
@@ -17,7 +17,7 @@ void recursive_copying(TBinaryTree *curr, const sptr(TreeElem) o_curr) {
         recursive_copying(curr, o_curr->get_left());
     if(o_curr->get_right())
         recursive_copying(curr, o_curr->get_right());
-}
+}*/
 
 
 void TBinaryTree::Push(Octagon octagon) {

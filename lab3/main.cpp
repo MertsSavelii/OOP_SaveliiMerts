@@ -12,13 +12,17 @@ int main()
         tree.Push(a[i]);
     }
     
-    std::cout << std::make_shared<TBinaryTree> (tree) << std::endl;
-    //tree->Count(20, 50);
-    /*std::cout << tree << " - кол фигур в диапазоне 20-50" << std::endl;
-    tree->Pop(a[2]);
-    std::cout << tree << endl;
-    TBinaryTree biba(tree);
+    std::cout << tree << std::endl;
+    std::cout << tree.Count(20, 50) << " - кол фигур в диапазоне 20-50" << std::endl;
+    tree.Pop(a[2]);
+    std::cout << tree << std::endl;
     tree.Clear();
-    std::cout << biba << endl << tree << endl;*/
+    std::cout << tree << std::endl;
+    
+    /*TBinaryTree biba(tree);
+    tree.Clear();
+    std::cout << std::make_shared<TBinaryTree> (biba); 
+    std::cout << std::endl << std::make_shared<TBinaryTree> (tree);
+    std::cout << std::endl;*/
     return 0;
 }

@@ -17,7 +17,7 @@ public:
     bool Empty();
     double Count(double min_area, double max_area);
 
-    friend std::ostream& operator<<(std::ostream& os, const sptr(TBinaryTree) tree);
+    friend std::ostream& operator<<(std::ostream& os, const TBinaryTree tree);
 
     virtual ~TBinaryTree();
 private:

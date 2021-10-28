@@ -75,7 +75,7 @@ void TBinaryTree::Pop(Octagon octagon) {
     if (curr == nullptr)
         return;
 
-    curr->set_count_fig(curr->get_count_fig() + 1);
+    curr->set_count_fig(curr->get_count_fig() - 1);
 
     if(curr->get_count_fig() <= 0)
     {
@@ -227,8 +227,8 @@ double recursive_counting(const double min_area, const double max_area, sptr(Tre
 
 
 void Tree_out (std::ostream& os, sptr(TreeElem) curr);
-std::ostream& operator<<(std::ostream& os, const sptr(TBinaryTree) tree) {
-    sptr(TreeElem) curr = tree->t_root;
+std::ostream& operator<<(std::ostream& os, const TBinaryTree tree) {
+    sptr(TreeElem) curr = tree.t_root;
     Tree_out(os, curr);
     return os;
 }

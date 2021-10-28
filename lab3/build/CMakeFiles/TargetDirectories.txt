@@ -1,3 +1,0 @@
-C:/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab3/build/CMakeFiles/lab2_test.dir
-C:/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab3/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab3/build/CMakeFiles/ZERO_CHECK.dir

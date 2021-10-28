@@ -4,22 +4,6 @@ TBinaryTree::TBinaryTree() {
     t_root = nullptr;
 }
 
-/*void recursive_copying(TBinaryTree *curr, const sptr(TreeElem)  o_curr);
-TBinaryTree::TBinaryTree(const TBinaryTree& other) {
-    recursive_copying(this, other.t_root);
-}
-
-void recursive_copying(TBinaryTree *curr, const sptr(TreeElem) o_curr) {
-    if(o_curr)
-        for (int i = 0; i < o_curr->get_count_fig(); i++)
-            curr->Push(o_curr->get_octagon());
-    if(o_curr->get_left())
-        recursive_copying(curr, o_curr->get_left());
-    if(o_curr->get_right())
-        recursive_copying(curr, o_curr->get_right());
-}*/
-
-
 void TBinaryTree::Push(Octagon octagon) {
     sptr(TreeElem) curr = t_root;
     while (curr)

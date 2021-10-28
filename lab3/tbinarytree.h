@@ -9,8 +9,6 @@ class TBinaryTree {
 public:
     TBinaryTree();
 
-    //TBinaryTree(const TBinaryTree& other);
-
     void Push(Octagon octagon);
     void Pop(Octagon octagon);
     void Clear();

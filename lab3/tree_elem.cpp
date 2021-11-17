@@ -10,15 +10,15 @@ TreeElem::TreeElem() {
     t_right = nullptr;
 }
 
-TreeElem::TreeElem(const SPTR(Octagon) octagon) {
-    octi = octagon;
+TreeElem::TreeElem(const Octagon octagon) {
+    octi = MakeSPTR(Octagon)(octagon);
     count_fig = 1;
     t_left = nullptr;
     t_right = nullptr;
 }
 
-const SPTR(Octagon) TreeElem::get_octagon() const{
-    return octi;
+const Octagon& TreeElem::get_octagon() const{
+    return *octi;
 }
 int TreeElem::get_count_fig() const{
     return count_fig;
@@ -30,8 +30,8 @@ SPTR(TreeElem) TreeElem::get_right() const{
     return t_right;
 }
 
-void TreeElem::set_octagon(const SPTR(Octagon) octagon){
-    octi = octagon;
+void TreeElem::set_octagon(const Octagon& octagon){
+    octi = MakeSPTR(Octagon)(octagon);
 }
 void TreeElem::set_count_fig(const int count) {
     count_fig = count;

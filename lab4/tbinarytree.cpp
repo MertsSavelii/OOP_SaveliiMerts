@@ -5,7 +5,7 @@ TBinaryTree::TBinaryTree() {
     t_root = nullptr;
 }
 
-void TBinaryTree::Push(const SPTR(Octagon) octagon) {
+void TBinaryTree::Push(const Octagon& octagon) {
     SPTR(TreeElem) curr = t_root;
     SPTR(TreeElem) OctSptr(new TreeElem(octagon));
     
@@ -15,42 +15,42 @@ void TBinaryTree::Push(const SPTR(Octagon) octagon) {
     }
     while (curr)
     {
-        if (*curr->get_octagon() == *octagon)
+        if (curr->get_octagon() == octagon)
         {
             curr->set_count_fig(curr->get_count_fig() + 1);
             return;
         }
-        if (octagon->Area() < curr->get_octagon()->Area())
+        if (octagon.Area() < curr->get_octagon().Area())
             if (curr->get_left() == nullptr)
             {
                 curr->set_left(OctSptr);
                 return;
             }
-        if (octagon->Area() >= curr->get_octagon()->Area())
+        if (octagon.Area() >= curr->get_octagon().Area())
             if (curr->get_right() == nullptr && !(curr->get_octagon() == octagon))
             {
                 curr->set_right(OctSptr);
                 return;
             }
-        if (curr->get_octagon()->Area() > octagon->Area())
+        if (curr->get_octagon().Area() > octagon.Area())
             curr = curr->get_left();
         else
             curr = curr->get_right();
     }
 }
 
-const SPTR(Octagon) TBinaryTree::GetItemNotLess(double area) {
+const Octagon& TBinaryTree::GetItemNotLess(double area) {
     SPTR(TreeElem) curr = t_root;
     while (curr)
     {
-        if (area == curr->get_octagon()->Area()) 
+        if (area == curr->get_octagon().Area()) 
             return curr->get_octagon();
-        if (area < curr->get_octagon()->Area())
+        if (area < curr->get_octagon().Area())
         {
             curr = curr->get_left();
             continue;
         }
-        if (area >= curr->get_octagon()->Area())
+        if (area >= curr->get_octagon().Area())
         {
             curr = curr->get_right();
             continue;
@@ -59,7 +59,7 @@ const SPTR(Octagon) TBinaryTree::GetItemNotLess(double area) {
     throw std::out_of_range("out of range");
 }
 
-size_t TBinaryTree::Count(const SPTR(Octagon) octagon) {
+size_t TBinaryTree::Count(const Octagon& octagon) {
     size_t count = 0;
     SPTR(TreeElem) curr = t_root;
     
@@ -67,12 +67,12 @@ size_t TBinaryTree::Count(const SPTR(Octagon) octagon) {
     {
         if (curr->get_octagon() == octagon)
             count = curr->get_count_fig();
-        if (octagon->Area() < curr->get_octagon()->Area())
+        if (octagon.Area() < curr->get_octagon().Area())
         {
             curr = curr->get_left();
             continue;
         }
-        if (octagon->Area() >= curr->get_octagon()->Area())
+        if (octagon.Area() >= curr->get_octagon().Area())
         {
             curr = curr->get_right();
             continue;
@@ -84,7 +84,7 @@ size_t TBinaryTree::Count(const SPTR(Octagon) octagon) {
 void Pop_List(SPTR(TreeElem) curr, SPTR(TreeElem) parent);
 void Pop_Part_of_Branch(SPTR(TreeElem) curr, SPTR(TreeElem) parent);
 void Pop_Root_of_Subtree(SPTR(TreeElem) curr, SPTR(TreeElem) parent);
-void TBinaryTree::Pop(const SPTR(Octagon) octagon) {
+void TBinaryTree::Pop(const Octagon& octagon) {
 
     SPTR(TreeElem) curr = t_root;
     SPTR(TreeElem) parent = nullptr;
@@ -92,7 +92,7 @@ void TBinaryTree::Pop(const SPTR(Octagon) octagon) {
     while (curr && curr->get_octagon() != octagon)
     {
         parent = curr;
-        if (curr->get_octagon()->Area() > octagon->Area())
+        if (curr->get_octagon().Area() > octagon.Area())
             curr = curr->get_left();
         else
             curr = curr->get_right();
@@ -191,8 +191,8 @@ std::ostream& operator<<(std::ostream& os, const TBinaryTree& tree) {
 void Tree_out (std::ostream& os, SPTR(TreeElem) curr) {
     if (curr)
     {
-        if(curr->get_octagon()->Area() >= 0) 
-            os << curr->get_count_fig() << "*" << curr->get_octagon()->Area();
+        if(curr->get_octagon().Area() >= 0) 
+            os << curr->get_count_fig() << "*" << curr->get_octagon().Area();
         if(curr->get_left() || curr->get_right()) 
         {
             os << ": [";

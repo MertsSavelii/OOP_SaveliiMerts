@@ -5,18 +5,19 @@
 #include "octagon.h"
 
 #define SPTR(T) std::shared_ptr<T>
+#define MakeSPTR(T) std::make_shared<T>
 
 class TreeElem{
 public:
     TreeElem();
-    TreeElem(const SPTR(Octagon) octagon);
+    TreeElem(const Octagon octagon);
 
-    const SPTR(Octagon) get_octagon() const;
+    const Octagon& get_octagon() const;
     int get_count_fig() const;
     SPTR(TreeElem) get_left() const;
     SPTR(TreeElem) get_right() const;
     
-    void set_octagon(const SPTR(Octagon) octagon);
+    void set_octagon(const Octagon& octagon);
     void set_count_fig(const int count);
     void set_left(SPTR(TreeElem) to_left);
     void set_right(SPTR(TreeElem) to_right);

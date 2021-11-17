@@ -1,3 +1,0 @@
-/mnt/c/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab2_test/tmp/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab2_test/tmp/CMakeFiles/edit_cache.dir
-/mnt/c/Users/Савелий/Documents/GitHub/OOP_SaveliiMerts/lab2_test/tmp/CMakeFiles/lab2_test.dir

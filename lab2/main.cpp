@@ -2,23 +2,25 @@
 #include "tbinarytree.h"
 #include "octagon.h"
 
-using namespace std;
 int main()
 {
     Octagon a[8];
     TBinaryTree tree;
     for (int i = 0; i < 8; i++)
     {
-        cin>>a[i];
+        std::cin>>a[i];
         tree.Push(a[i]);
     }
     
-    cout << tree << endl;
-    cout << tree.Count(20, 50) << " - кол фигур в диапазоне 20-50" << endl;
-    tree.Pop(a[2]);
-    cout << tree << endl;
-    TBinaryTree biba(tree);
+    std::cout << tree << std::endl;
+    a[0] = tree.GetItemNotLess(125);
+    //std::cout << tree.Count(a[2]) << std::endl;
+    //tree.Pop(a[1]);
+    //tree.Pop(a[1]);
+    //std::cout << tree << std::endl;
     tree.Clear();
-    cout << biba << endl << tree << endl;
+    std::cout << tree << std::endl;
+    if (tree.Empty())
+        std::cout << "дерево пустое" << std::endl;
     return 0;
 }

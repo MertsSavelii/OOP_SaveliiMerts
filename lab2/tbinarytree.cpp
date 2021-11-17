@@ -1,92 +1,119 @@
 #include "tbinarytree.h"
+#include <stdexcept>
 
 TBinaryTree::TBinaryTree() {
     t_root = nullptr;
 }
 
-void recursive_copying(TBinaryTree *curr, const TreeElem  *o_curr);
-TBinaryTree::TBinaryTree(const TBinaryTree& other) {
-    recursive_copying(this, other.t_root);
-}
-
-void recursive_copying(TBinaryTree *curr, const TreeElem  *o_curr) {
-    if(o_curr)
-        for (int i = 0; i < o_curr->count_fig; i++)
-            curr->Push(o_curr->octi);
-    if(o_curr->t_left)
-        recursive_copying(curr, o_curr->t_left);
-    if(o_curr->t_right)
-        recursive_copying(curr, o_curr->t_right);
-}
-
-
-void TBinaryTree::Push(Octagon octagon) {
-    TreeElem * curr = t_root;
+void TBinaryTree::Push(const Octagon& octagon) {
+    TreeElem* curr = t_root;
+    
+    if (curr == nullptr)
+        t_root = new TreeElem(octagon);
+    
     while (curr)
     {
-        if (curr->octi.Area() == octagon.Area())
+        if (curr->get_octagon() == octagon)
         {
-            curr->count_fig++;
+            curr->set_count_fig(curr->get_count_fig() + 1);
             return;
         }
-        if (curr->octi.Area() > octagon.Area() && curr->t_left == NULL)
-        {
-            curr->t_left = new TreeElem(octagon);
-            return;
-        }
-        if (curr->octi.Area() < octagon.Area() && curr->t_right == NULL)
-        {
-            curr->t_right = new TreeElem(octagon);
-            return;
-        }
-        if (curr->octi.Area() > octagon.Area())
-            curr = curr->t_left;
+        if (octagon.Area() < curr->get_octagon().Area())
+            if (curr->get_left() == nullptr)
+            {
+                curr->set_left(new TreeElem(octagon));
+                return;
+            }
+        if (octagon.Area() >= curr->get_octagon().Area())
+            if (curr->get_right() == nullptr && !(curr->get_octagon() == octagon))
+            {
+                curr->set_right(new TreeElem(octagon));
+                return;
+            }
+        if (curr->get_octagon().Area() > octagon.Area())
+            curr = curr->get_left();
         else
-            curr = curr->t_right;
-    }
-    if (curr == nullptr)
-    {
-        t_root = new TreeElem(octagon);
-        return;
+            curr = curr->get_right();
     }
 }
 
+const Octagon& TBinaryTree::GetItemNotLess(double area) {
+    TreeElem* curr = t_root;
+    while (curr)
+    {
+        if (area == curr->get_octagon().Area()) 
+            return curr->get_octagon();
+        if (area < curr->get_octagon().Area())
+        {
+            curr = curr->get_left();
+            continue;
+        }
+        if (area >= curr->get_octagon().Area())
+        {
+            curr = curr->get_right();
+            continue;
+        }
+    }
+    throw std::out_of_range("out of range");
+}
 
-void Pop_List(TreeElem *curr, TreeElem *parent);
-void Pop_Part_of_Branch(TreeElem *curr, TreeElem *parent);
-void Pop_Root_of_Subtree(TreeElem *curr, TreeElem *parent);
-void TBinaryTree::Pop(Octagon octagon) {
+size_t TBinaryTree::Count(const Octagon& octagon) {
+    size_t count = 0;
+    TreeElem* curr = t_root;
+    
+    while (curr)
+    {
+        if (curr->get_octagon() == octagon)
+            count = curr->get_count_fig();
+        if (octagon.Area() < curr->get_octagon().Area())
+        {
+            curr = curr->get_left();
+            continue;
+        }
+        if (octagon.Area() >= curr->get_octagon().Area())
+        {
+            curr = curr->get_right();
+            continue;
+        }
+    }
+    return count;
+}
 
-    TreeElem *curr = t_root;
-    TreeElem *parent = nullptr;
+void Pop_List(TreeElem* curr, TreeElem* parent);
+void Pop_Part_of_Branch(TreeElem* curr, TreeElem* parent);
+void Pop_Root_of_Subtree(TreeElem* curr, TreeElem* parent);
+void TBinaryTree::Pop(const Octagon& octagon) {
 
-    while (curr && curr->octi.Area() != octagon.Area())
+    TreeElem* curr = t_root;
+    TreeElem* parent = nullptr;
+
+    while (curr && curr->get_octagon() != octagon)
     {
         parent = curr;
-        if (curr->octi.Area() > octagon.Area())
-            curr = curr->t_left;
+        if (curr->get_octagon().Area() > octagon.Area())
+            curr = curr->get_left();
         else
-            curr = curr->t_right;
+            curr = curr->get_right();
     }
 
     if (curr == nullptr)
         return;
 
-    curr->count_fig--;
+    curr->set_count_fig(curr->get_count_fig() - 1);
 
-    if(curr->count_fig <= 0)
+    if(curr->get_count_fig() <= 0)
     {
-        if (curr->t_left == nullptr && curr->t_right == nullptr)
+        if (curr->get_left() == nullptr && curr->get_right() == nullptr)
         {
             Pop_List(curr, parent);
             return;
         }
-        if (curr->t_left == nullptr || curr->t_right == nullptr)
+        if (curr->get_left() == nullptr || curr->get_right() == nullptr)
         {
             Pop_Part_of_Branch(curr, parent);
             return;
         }
-        if (curr->t_left != nullptr && curr->t_right != nullptr)
+        if (curr->get_left() != nullptr && curr->get_right() != nullptr)
         {
            Pop_Root_of_Subtree(curr, parent);
            return;
@@ -94,170 +121,118 @@ void TBinaryTree::Pop(Octagon octagon) {
     }
 }
 
-void Pop_List(TreeElem *curr, TreeElem *parent) {
-    if (parent->t_left == curr)
-                parent->t_left = nullptr;
+void Pop_List(TreeElem* curr, TreeElem* parent) {
+    if (parent->get_left() == curr)
+                parent->set_left(nullptr);
             else
-                parent->t_right = nullptr;
-    delete curr;
+                parent->set_right(nullptr);
+    delete(curr);
 }
 
-void Pop_Part_of_Branch(TreeElem *curr, TreeElem *parent) {
-    if (curr->t_right == nullptr)
-    {
-        if(parent)
-        {
-            if (parent && parent->t_left == curr)
-                parent->t_left = curr->t_left;
+void Pop_Part_of_Branch(TreeElem* curr, TreeElem* parent) {
+    if (parent) {
+        if (curr->get_left()) {
+            if (parent->get_left() == curr)
+                parent->set_left(curr->get_left());
 
-            if (parent && parent->t_right == curr)
-                parent->t_right = curr->t_left;
-        
-            curr->t_right = nullptr;
-            curr->t_left = nullptr;
-            delete curr;
-            return;
-        }
-    }
-
-    if (curr->t_left == nullptr)
-    {
-        if(parent)
-        {
-            if (parent && parent->t_left == curr)
-                parent->t_left = curr->t_right;
-
-            if (parent && parent->t_right == curr)
-                parent->t_right = curr->t_right;
-
-            curr->t_right = nullptr;
-            curr->t_left = nullptr;
-            delete curr;
-            return;
-        }
-    }
-
-}
-
-void Pop_Root_of_Subtree(TreeElem *curr, TreeElem *parent) {
-    TreeElem *replace = curr->t_left;
-    TreeElem *rep_par = curr;
-    while (replace->t_right)
-    {
-        rep_par = replace;
-        replace = replace->t_right;
-    }
-
-    curr->octi = replace->octi;
-    curr->count_fig = replace->count_fig;
+            if (parent->get_right() == curr)
+                parent->set_right(curr->get_left());
     
-    if (rep_par->t_left == replace)
-        rep_par->t_left = nullptr;
-    else
-        rep_par->t_right = nullptr;
+            curr->set_right(nullptr);
+            curr->set_left(nullptr);
+            delete(curr);
+            return;
+        }
 
-    delete replace;
+        if (curr->get_left() == nullptr) {
+            if (parent && parent->get_left() == curr)
+                parent->set_left(curr->get_right());
+
+            if (parent && parent->get_right() == curr)
+                parent->set_right(curr->get_right());
+
+            curr->set_right(nullptr);
+            curr->set_left(nullptr);
+            delete(curr);
+            return;
+        }
+    }
+}
+
+void Pop_Root_of_Subtree(TreeElem* curr, TreeElem* parent) {
+    TreeElem* replace = curr->get_left();
+    TreeElem* rep_parent = curr;
+    while (replace->get_right())
+    {
+        rep_parent = replace;
+        replace = replace->get_right();
+    }
+
+    curr->set_octagon(replace->get_octagon());
+    curr->set_count_fig(replace->get_count_fig());
+    
+    if (rep_parent->get_left() == replace)
+        rep_parent->set_left(nullptr);
+    else
+        rep_parent->set_right(nullptr);
+    delete(replace);
     return;
 }
 
-
-
-void recursive_clear(TreeElem *curr);
-void TBinaryTree::Clear() {
-    if (t_root->t_left)
-        recursive_clear(t_root->t_left);
-    t_root->t_left = nullptr;
-    if (t_root->t_right)
-        recursive_clear(t_root->t_right);
-    t_root->t_right = nullptr;
-    t_root = nullptr;
-}
-
-void recursive_clear(TreeElem *curr)
-{
-    if(curr)
-    {
-        if (curr->t_left)
-            recursive_clear(curr->t_left);
-        curr->t_left = nullptr;
-        if (curr->t_right)
-            recursive_clear(curr->t_right);
-        curr->t_right = nullptr;
-        delete curr;
-    }
-}
-
 bool TBinaryTree::Empty() {
-    if (t_root == nullptr)
-        return true;
-    else
-        return false;
+    return t_root == nullptr ? true : false;
 }
 
-
-double recursive_counting(const double min_area, const double max_area, TreeElem *curr) ;
-double TBinaryTree::Count(double min_area, double max_area) {
-    int count = 0;
-    TreeElem *curr = t_root;
-    while (curr && (curr->octi.Area() < min_area || curr->octi.Area() > max_area))
-    {
-        if (curr && curr->octi.Area() < min_area) 
-            curr = curr->t_right;
-        if (curr && curr->octi.Area() > min_area)
-            curr = curr->t_left;
-    }
-
-    if (curr)
-        count = recursive_counting(min_area, max_area, curr);  
-    
-    return count;
-}
-
-double recursive_counting(const double min_area, const double max_area, TreeElem *curr) {
-    int count = 0;
-
-    if (curr && curr->octi.Area() >= min_area && curr->octi.Area() <= max_area)
-    {
-        count += curr->count_fig;
-        if (curr->t_left && curr->t_left->octi.Area() >= min_area) 
-            count += recursive_counting(min_area, max_area, curr->t_left);
-
-        if (curr->t_right && curr->t_right->octi.Area() <= max_area) 
-            count += recursive_counting(min_area, max_area, curr->t_right);
-        
-    }
-    return count;
-}
-
-
-void Tree_out (std::ostream& os, TreeElem *curr);
+void Tree_out (std::ostream& os, TreeElem* curr);
 std::ostream& operator<<(std::ostream& os, const TBinaryTree& tree) {
-    TreeElem *curr = tree.t_root;
+    TreeElem* curr = tree.t_root;
     Tree_out(os, curr);
     return os;
 }
 
-void Tree_out (std::ostream& os, TreeElem *curr) {
+void Tree_out (std::ostream& os, TreeElem* curr) {
     if (curr)
     {
-        if(curr->octi.Area() >= 0) 
-            std::cout << curr->count_fig << "*" << curr->octi.Area();
-        if(curr->t_left || curr->t_right) 
+        if(curr->get_octagon().Area() >= 0) 
+            os << curr->get_count_fig() << "*" << curr->get_octagon().Area();
+        if(curr->get_left() || curr->get_right()) 
         {
             os << ": [";
-            if (curr->t_left)
-                Tree_out(os, curr->t_left);
-            if(curr->t_left && curr->t_right)
+            if (curr->get_left())
+                Tree_out(os, curr->get_left());
+            if(curr->get_left() && curr->get_right())
                 os << ", ";
-            if (curr->t_right)
-                Tree_out(os, curr->t_right);
+            if (curr->get_right())
+                Tree_out(os, curr->get_right());
             os << "]";
         }
     }
 }
 
+void recursive_clear(TreeElem* curr);
+void TBinaryTree::Clear() {
+    if (t_root->get_left())
+        recursive_clear(t_root->get_left());
+    t_root->set_left(nullptr);
+    if (t_root->get_right())
+        recursive_clear(t_root->get_right());
+    t_root->set_right(nullptr);
+    delete t_root;
+    t_root = nullptr;
+}
+
+void recursive_clear(TreeElem* curr){
+    if(curr)
+    {
+        if (curr->get_left())
+            recursive_clear(curr->get_left());
+        curr->set_left(nullptr);
+        if (curr->get_right())
+            recursive_clear(curr->get_right());
+        curr->set_right(nullptr);
+        delete curr;
+    }
+}
 
 TBinaryTree::~TBinaryTree() {
-    delete t_root;
-    std::cout << "дерево удалено" << std::endl;
 }

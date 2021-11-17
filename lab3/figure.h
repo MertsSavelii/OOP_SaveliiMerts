@@ -10,4 +10,4 @@ public:
     virtual ~Figure() {};
 };
 
-#endif 
+#endif

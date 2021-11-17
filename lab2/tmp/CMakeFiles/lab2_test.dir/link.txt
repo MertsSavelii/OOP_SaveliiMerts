@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/lab2_test.dir/main.cpp.o CMakeFiles/lab2_test.dir/tbinarytree.cpp.o CMakeFiles/lab2_test.dir/tree_elem.cpp.o  -o lab2_test 

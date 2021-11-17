@@ -4,29 +4,29 @@
 #include <memory>
 #include "octagon.h"
 
-#define sptr(T) std::shared_ptr<T>
+#define SPTR(T) std::shared_ptr<T>
 
 class TreeElem{
 public:
     TreeElem();
-    TreeElem(const Octagon octagon);
+    TreeElem(const SPTR(Octagon) octagon);
 
-    Octagon get_octagon();
-    int get_count_fig();
-    sptr(TreeElem) get_left();
-    sptr(TreeElem) get_right();
+    const SPTR(Octagon) get_octagon() const;
+    int get_count_fig() const;
+    SPTR(TreeElem) get_left() const;
+    SPTR(TreeElem) get_right() const;
     
-    void set_octagon(Octagon octi);
+    void set_octagon(const SPTR(Octagon) octagon);
     void set_count_fig(const int count);
-    void set_left(sptr(TreeElem) to_left);
-    void set_right(sptr(TreeElem) to_right);
+    void set_left(SPTR(TreeElem) to_left);
+    void set_right(SPTR(TreeElem) to_right);
 
     virtual ~TreeElem();
 private:
-    sptr(Octagon) octi;
+    SPTR(Octagon) octi;
     int count_fig;
-    sptr(TreeElem) t_left;
-    sptr(TreeElem) t_right;
+    SPTR(TreeElem) t_left;
+    SPTR(TreeElem) t_right;
 };
 
 #endif

@@ -5,9 +5,9 @@
 
 class Figure {
 public:
-    virtual size_t VertexesNumber() = 0;
-    virtual double Area() = 0;
-    virtual ~Figure() {};
+    size_t VertexesNumber();
+    double Area();
+    ~Figure() {};
 };
 
-#endif
+#endif 

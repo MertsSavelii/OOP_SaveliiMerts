@@ -53,12 +53,12 @@ std::ostream& operator<<(std::ostream& os, const Octagon& obj) {
     return os;
 }
 
-double Octagon::Area() {
+double Octagon::Area() const{
   	return 0.5 * abs( a_.getX()*b_.getY() + b_.getX()*c_.getY() + c_.getX()*d_.getY() + d_.getX()*e_.getY() + e_.getX()*f_.getY() + f_.getX()*g_.getY() + g_.getX()*h_.getY() + h_.getX()*a_.getY()
   	- a_.getY()*b_.getX() - b_.getY()*c_.getX() - c_.getY()*d_.getX() - d_.getY()*e_.getX() - e_.getY()*f_.getX() - f_.getY()*g_.getX() - g_.getY()*h_.getX() - h_.getY()*a_.getX());
 }
 
-Octagon& Octagon::operator=(const Octagon& other) {
+const Octagon& Octagon::operator=(const Octagon& other) {
   	if (this == &other)
     	return *this;
 
@@ -74,17 +74,29 @@ Octagon& Octagon::operator=(const Octagon& other) {
   	return *this;
 }
 
-bool Octagon::operator==(const Octagon& other) {
-    if(a_ != other.a_) return false;
-    if(b_ != other.b_) return false;
-    if(c_ != other.c_) return false;
-    if(d_ != other.d_) return false;
-    if(e_ != other.e_) return false;
-    if(f_ != other.f_) return false;
-    if(g_ != other.g_) return false;
-    if(h_ != other.h_) return false;
+bool Octagon::operator==(const Octagon& other) const{
+    if (a_ != other.a_) return false;
+    if (b_ != other.b_) return false;
+    if (c_ != other.c_) return false;
+    if (d_ != other.d_) return false;
+    if (e_ != other.e_) return false;
+    if (f_ != other.f_) return false;
+    if (g_ != other.g_) return false;
+    if (h_ != other.h_) return false;
 
     return true;
+}
+bool Octagon::operator!=(const Octagon& other) const{
+    if (a_ != other.a_) return true;
+    if (b_ != other.b_) return true;
+    if (c_ != other.c_) return true;
+    if (d_ != other.d_) return true;
+    if (e_ != other.e_) return true;
+    if (f_ != other.f_) return true;
+    if (g_ != other.g_) return true;
+    if (h_ != other.h_) return true;
+
+    return false;
 }
 
 Octagon::~Octagon() {

@@ -14,13 +14,13 @@ public:
     friend std::istream& operator>>(std::istream& is,  Octagon& obj);
     friend std::ostream& operator<<(std::ostream& os, const Octagon& obj);
 
-    virtual ~Octagon();
-
     size_t VertexesNumber();
-    double Area();
-    Octagon& operator=(const Octagon& other);
-    bool operator==(const Octagon& other);
+    double Area() const;
+    const Octagon& operator=(const Octagon& other);
+    bool operator==(const Octagon& other) const;
+    bool operator!=(const Octagon& other) const;
 
+    ~Octagon();
 private:
     Point a_, b_, c_, d_, e_, f_, g_, h_;
 };

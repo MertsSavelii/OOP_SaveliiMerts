@@ -9,13 +9,13 @@ class TBinaryTree {
  public:
  TBinaryTree();
  
- void Push(const Octagon& octagon);
+ void Push(const SPTR(Octagon) octagon);
 
- const Octagon& GetItemNotLess(double area);
+ const SPTR(Octagon) GetItemNotLess(double area);
 
- size_t Count(const Octagon& octagon);
+ size_t Count(const SPTR(Octagon) octagon);
 
- void Pop(const Octagon& octagon);
+ void Pop(const SPTR(Octagon) octagon);
 
  bool Empty();
 
@@ -25,7 +25,7 @@ class TBinaryTree {
 
  virtual ~TBinaryTree();
  private:
- TreeElem* t_root;
+ SPTR(TreeElem) t_root;
 };
 
 #endif

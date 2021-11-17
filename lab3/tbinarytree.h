@@ -6,19 +6,26 @@
 #include "octagon.h"
 
 class TBinaryTree {
-public:
-    TBinaryTree();
+ public:
+ TBinaryTree();
+ 
+ void Push(const SPTR(Octagon) octagon);
 
-    void Push(Octagon octagon);
-    void Pop(Octagon octagon);
-    void Clear();
-    bool Empty();
-    double Count(double min_area, double max_area);
+ const SPTR(Octagon) GetItemNotLess(double area);
 
-    friend std::ostream& operator<<(std::ostream& os, const TBinaryTree tree);
+ size_t Count(const SPTR(Octagon) octagon);
 
-    virtual ~TBinaryTree();
-private:
-    sptr(TreeElem) t_root;
+ void Pop(const SPTR(Octagon) octagon);
+
+ bool Empty();
+
+ friend std::ostream& operator<<(std::ostream& os, const TBinaryTree& tree);
+
+ void Clear();
+
+ virtual ~TBinaryTree();
+ private:
+ SPTR(TreeElem) t_root;
 };
+
 #endif

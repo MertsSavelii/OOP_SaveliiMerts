@@ -1,13 +1,15 @@
 #include "tbinarytree.h"
 #include <stdexcept>
 
-TBinaryTree::TBinaryTree() {
+template <class Poligon>
+TBinaryTree<Poligon>::TBinaryTree() {
     t_root = nullptr;
 }
 
-void TBinaryTree::Push(const Octagon& octagon) {
-    SPTR(TreeElem) curr = t_root;
-    SPTR(TreeElem) OctSptr(new TreeElem(octagon));
+template <class Poligon>
+void TBinaryTree<Poligon>::Push(const Poligon& octagon) {
+    SPTR(TreeElem<Poligon>) curr = t_root;
+    SPTR(TreeElem<Poligon>) OctSptr(new TreeElem<Poligon>(octagon));
     
     if (!curr)
     {
@@ -39,8 +41,9 @@ void TBinaryTree::Push(const Octagon& octagon) {
     }
 }
 
-const Octagon& TBinaryTree::GetItemNotLess(double area) {
-    SPTR(TreeElem) curr = t_root;
+template <class Poligon>
+const Poligon& TBinaryTree<Poligon>::GetItemNotLess(double area) {
+    SPTR(TreeElem<Poligon>) curr = t_root;
     while (curr)
     {
         if (area == curr->get_octagon().Area()) 
@@ -59,9 +62,10 @@ const Octagon& TBinaryTree::GetItemNotLess(double area) {
     throw std::out_of_range("out of range");
 }
 
-size_t TBinaryTree::Count(const Octagon& octagon) {
+template <class Poligon>
+size_t TBinaryTree<Poligon>::Count(const Poligon& octagon) {
     size_t count = 0;
-    SPTR(TreeElem) curr = t_root;
+    SPTR(TreeElem<Poligon>) curr = t_root;
     
     while (curr)
     {
@@ -81,13 +85,65 @@ size_t TBinaryTree::Count(const Octagon& octagon) {
     return count;
 }
 
-void Pop_List(SPTR(TreeElem) curr, SPTR(TreeElem) parent);
-void Pop_Part_of_Branch(SPTR(TreeElem) curr, SPTR(TreeElem) parent);
-void Pop_Root_of_Subtree(SPTR(TreeElem) curr, SPTR(TreeElem) parent);
-void TBinaryTree::Pop(const Octagon& octagon) {
+template <class Poligon>
+void Pop_List(SPTR(TreeElem<Poligon>) curr, SPTR(TreeElem<Poligon>) parent) {
+    if (parent->get_left() == curr)
+                parent->set_left(nullptr);
+            else
+                parent->set_right(nullptr);
+}
+template <class Poligon>
+void Pop_Part_of_Branch(SPTR(TreeElem<Poligon>) curr, SPTR(TreeElem<Poligon>) parent) {
+    if (parent) {
+        if (curr->get_left()) {
+            if (parent->get_left() == curr)
+                parent->set_left(curr->get_left());
 
-    SPTR(TreeElem) curr = t_root;
-    SPTR(TreeElem) parent = nullptr;
+            if (parent->get_right() == curr)
+                parent->set_right(curr->get_left());
+    
+            curr->set_right(nullptr);
+            curr->set_left(nullptr);
+            return;
+        }
+
+        if (curr->get_left() == nullptr) {
+            if (parent && parent->get_left() == curr)
+                parent->set_left(curr->get_right());
+
+            if (parent && parent->get_right() == curr)
+                parent->set_right(curr->get_right());
+
+            curr->set_right(nullptr);
+            curr->set_left(nullptr);
+            return;
+        }
+    }
+}
+template <class Poligon>
+void Pop_Root_of_Subtree(SPTR(TreeElem<Poligon>) curr, SPTR(TreeElem<Poligon>) parent) {
+    SPTR(TreeElem<Poligon>) replace = curr->get_left();
+    SPTR(TreeElem<Poligon>) rep_parent = curr;
+    while (replace->get_right())
+    {
+        rep_parent = replace;
+        replace = replace->get_right();
+    }
+
+    curr->set_octagon(replace->get_octagon());
+    curr->set_count_fig(replace->get_count_fig());
+    
+    if (rep_parent->get_left() == replace)
+        rep_parent->set_left(nullptr);
+    else
+        rep_parent->set_right(nullptr);
+    return;
+}
+template <class Poligon>
+void TBinaryTree<Poligon>::Pop(const Poligon& octagon) {
+
+    SPTR(TreeElem<Poligon>) curr = t_root;
+    SPTR(TreeElem<Poligon>) parent = nullptr;
 
     while (curr && curr->get_octagon() != octagon)
     {
@@ -123,72 +179,13 @@ void TBinaryTree::Pop(const Octagon& octagon) {
     }
 }
 
-void Pop_List(SPTR(TreeElem) curr, SPTR(TreeElem) parent) {
-    if (parent->get_left() == curr)
-                parent->set_left(nullptr);
-            else
-                parent->set_right(nullptr);
-}
-
-void Pop_Part_of_Branch(SPTR(TreeElem) curr, SPTR(TreeElem) parent) {
-    if (parent) {
-        if (curr->get_left()) {
-            if (parent->get_left() == curr)
-                parent->set_left(curr->get_left());
-
-            if (parent->get_right() == curr)
-                parent->set_right(curr->get_left());
-    
-            curr->set_right(nullptr);
-            curr->set_left(nullptr);
-            return;
-        }
-
-        if (curr->get_left() == nullptr) {
-            if (parent && parent->get_left() == curr)
-                parent->set_left(curr->get_right());
-
-            if (parent && parent->get_right() == curr)
-                parent->set_right(curr->get_right());
-
-            curr->set_right(nullptr);
-            curr->set_left(nullptr);
-            return;
-        }
-    }
-}
-
-void Pop_Root_of_Subtree(SPTR(TreeElem) curr, SPTR(TreeElem) parent) {
-    SPTR(TreeElem) replace = curr->get_left();
-    SPTR(TreeElem) rep_parent = curr;
-    while (replace->get_right())
-    {
-        rep_parent = replace;
-        replace = replace->get_right();
-    }
-
-    curr->set_octagon(replace->get_octagon());
-    curr->set_count_fig(replace->get_count_fig());
-    
-    if (rep_parent->get_left() == replace)
-        rep_parent->set_left(nullptr);
-    else
-        rep_parent->set_right(nullptr);
-    return;
-}
-
-bool TBinaryTree::Empty() {
+template <class Poligon>
+bool TBinaryTree<Poligon>::Empty() {
     return t_root == nullptr ? true : false;
 }
 
-void Tree_out (std::ostream& os, SPTR(TreeElem) curr);
-std::ostream& operator<<(std::ostream& os, const TBinaryTree& tree) {
-    SPTR(TreeElem) curr = tree.t_root;
-    Tree_out(os, curr);
-    return os;
-}
-
-void Tree_out (std::ostream& os, SPTR(TreeElem) curr) {
+template <class Poligon>
+void Tree_out (std::ostream& os, SPTR(TreeElem<Poligon>) curr) {
     if (curr)
     {
         if(curr->get_octagon().Area() >= 0) 
@@ -206,19 +203,18 @@ void Tree_out (std::ostream& os, SPTR(TreeElem) curr) {
         }
     }
 }
-
-void recursive_clear(SPTR(TreeElem) curr);
-void TBinaryTree::Clear() {
-    if (t_root->get_left())
-        recursive_clear(t_root->get_left());
-    t_root->set_left(nullptr);
-    if (t_root->get_right())
-        recursive_clear(t_root->get_right());
-    t_root->set_right(nullptr);
-    t_root = nullptr;
+template <class A>
+std::ostream& operator<<(std::ostream& os, const TBinaryTree<A>& tree) {
+    SPTR(TreeElem<A>) curr = tree.t_root;
+    Tree_out(os, curr);
+    return os;
 }
 
-void recursive_clear(SPTR(TreeElem) curr){
+
+
+
+template <class Poligon>
+void recursive_clear(SPTR(TreeElem<Poligon>) curr){
     if(curr)
     {
         if (curr->get_left())
@@ -229,6 +225,17 @@ void recursive_clear(SPTR(TreeElem) curr){
         curr->set_right(nullptr);
     }
 }
+template <class Poligon>
+void TBinaryTree<Poligon>::Clear() {
+    if (t_root->get_left())
+        recursive_clear(t_root->get_left());
+    t_root->set_left(nullptr);
+    if (t_root->get_right())
+        recursive_clear(t_root->get_right());
+    t_root->set_right(nullptr);
+    t_root = nullptr;
+}
 
-TBinaryTree::~TBinaryTree() {
+template <class Poligon>
+TBinaryTree<Poligon>::~TBinaryTree() {
 }

@@ -53,10 +53,6 @@ std::ostream& operator<<(std::ostream& os, const Octagon& obj) {
     return os;
 }
 
-size_t Octagon::VertexesNumber() {
-    return 8;
-}
-
 double Octagon::Area() const{
   	return 0.5 * abs( a_.getX()*b_.getY() + b_.getX()*c_.getY() + c_.getX()*d_.getY() + d_.getX()*e_.getY() + e_.getX()*f_.getY() + f_.getX()*g_.getY() + g_.getX()*h_.getY() + h_.getX()*a_.getY()
   	- a_.getY()*b_.getX() - b_.getY()*c_.getX() - c_.getY()*d_.getX() - d_.getY()*e_.getX() - e_.getY()*f_.getX() - f_.getY()*g_.getX() - g_.getY()*h_.getX() - h_.getY()*a_.getX());

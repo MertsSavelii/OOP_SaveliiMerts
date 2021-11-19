@@ -5,7 +5,7 @@
 int main()
 {
     Octagon octi[8];
-    TBinaryTree tree;
+    TBinaryTree<Octagon> tree;
     for (int i = 0; i < 8; i++)
     {
         std::cin>>octi[i];

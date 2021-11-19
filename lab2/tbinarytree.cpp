@@ -39,6 +39,7 @@ void TBinaryTree::Push(const Octagon& octagon) {
 
 const Octagon& TBinaryTree::GetItemNotLess(double area) {
     TreeElem* curr = t_root;
+    
     while (curr)
     {
         if (area == curr->get_octagon().Area()) 
@@ -54,7 +55,8 @@ const Octagon& TBinaryTree::GetItemNotLess(double area) {
             continue;
         }
     }
-    throw std::out_of_range("out of range");
+    throw std::out_of_range("out_of_range");
+    
 }
 
 size_t TBinaryTree::Count(const Octagon& octagon) {

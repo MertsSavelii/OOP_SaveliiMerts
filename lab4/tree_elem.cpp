@@ -2,46 +2,56 @@
 #include <memory>
 #include "tree_elem.h"
 
-
-TreeElem::TreeElem() {
-    octi = nullptr;
+template <class Poligon>
+TreeElem<Poligon>::TreeElem() {
+    polig = nullptr;
     count_fig = 0;
     t_left = nullptr;
     t_right = nullptr;
 }
 
-TreeElem::TreeElem(const Octagon octagon) {
-    octi = MakeSPTR(Octagon)(octagon);
+template <class Poligon>
+TreeElem<Poligon>::TreeElem(const Poligon poligon) {
+    polig = MakeSPTR(Poligon)(poligon);
     count_fig = 1;
     t_left = nullptr;
     t_right = nullptr;
 }
 
-const Octagon& TreeElem::get_octagon() const{
-    return *octi;
+template <class Poligon>
+const Poligon& TreeElem<Poligon>::get_poligon() const{
+    return *polig;
 }
-int TreeElem::get_count_fig() const{
+template <class Poligon>
+int TreeElem<Poligon>::get_count_fig() const{
     return count_fig;
 }
-SPTR(TreeElem) TreeElem::get_left() const{
+template <class Poligon>
+SPTR(TreeElem<Poligon>) TreeElem<Poligon>::get_left() const{
     return t_left;
 }
-SPTR(TreeElem) TreeElem::get_right() const{
+template <class Poligon>
+SPTR(TreeElem<Poligon>) TreeElem<Poligon>::get_right() const{
     return t_right;
 }
 
-void TreeElem::set_octagon(const Octagon& octagon){
-    octi = MakeSPTR(Octagon)(octagon);
+template <class Poligon>
+void TreeElem<Poligon>::set_poligon(const Poligon& poligon){
+    polig = MakeSPTR(Poligon)(poligon);
 }
-void TreeElem::set_count_fig(const int count) {
+template <class Poligon>
+void TreeElem<Poligon>::set_count_fig(const int count) {
     count_fig = count;
 }
-void TreeElem::set_left(SPTR(TreeElem) to_left) {
+template <class Poligon>
+void TreeElem<Poligon>::set_left(SPTR(TreeElem<Poligon>) to_left) {
     t_left = to_left;
 }
-void TreeElem::set_right(SPTR(TreeElem) to_right) {
+template <class Poligon>
+void TreeElem<Poligon>::set_right(SPTR(TreeElem<Poligon>) to_right) {
     t_right = to_right;
 }
 
-TreeElem::~TreeElem() {
+template <class Poligon>
+TreeElem<Poligon>::~TreeElem() {
 }

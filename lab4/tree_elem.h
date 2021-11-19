@@ -2,32 +2,32 @@
 #define TREEELEM_H
 
 #include <memory>
-#include "octagon.h"
 
 #define SPTR(T) std::shared_ptr<T>
 #define MakeSPTR(T) std::make_shared<T>
 
+template <class Poligon>
 class TreeElem{
 public:
     TreeElem();
-    TreeElem(const Octagon octagon);
+    TreeElem(const Poligon poligon);
 
-    const Octagon& get_octagon() const;
+    const Poligon& get_poligon() const;
     int get_count_fig() const;
-    SPTR(TreeElem) get_left() const;
-    SPTR(TreeElem) get_right() const;
+    SPTR(TreeElem<Poligon>) get_left() const;
+    SPTR(TreeElem<Poligon>) get_right() const;
     
-    void set_octagon(const Octagon& octagon);
+    void set_poligon(const Poligon& poligon);
     void set_count_fig(const int count);
-    void set_left(SPTR(TreeElem) to_left);
-    void set_right(SPTR(TreeElem) to_right);
+    void set_left(SPTR(TreeElem<Poligon>) to_left);
+    void set_right(SPTR(TreeElem<Poligon>) to_right);
 
     virtual ~TreeElem();
 private:
-    SPTR(Octagon) octi;
+    SPTR(Poligon) polig;
     int count_fig;
-    SPTR(TreeElem) t_left;
-    SPTR(TreeElem) t_right;
+    SPTR(TreeElem<Poligon>) t_left;
+    SPTR(TreeElem<Poligon>) t_right;
 };
 
 #endif

@@ -13,15 +13,15 @@ int main()
     }
     
     std::cout << tree << std::endl;
-    //a = tree.GetItemNotLess(b->Area());
-    //std::cout << *a << std::endl;
-    //std::cout << tree.Count(a) << std::endl;
-    //tree.Pop(a);
-    //tree.Pop(a);
-    //std::cout << tree << std::endl;
-    //tree.Clear();
-    //std::cout << tree << std::endl;
-    //if (tree.Empty())
-        //std::cout << "дерево пустое" << std::endl;
+    octi[5] = tree.GetItemNotLess(octi[1].Area());
+    std::cout << octi[5] << std::endl;
+    std::cout << tree.Count(octi[0]) << std::endl;
+    tree.Pop(octi[0]);
+    tree.Pop(octi[0]);
+    std::cout << tree << std::endl;
+    tree.Clear();
+    std::cout << tree << std::endl;
+    if (tree.Empty())
+        std::cout << "дерево пустое" << std::endl;
     return 0;
 }

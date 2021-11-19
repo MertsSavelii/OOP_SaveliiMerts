@@ -8,7 +8,7 @@ template <class Poligon>
 class TBinaryTree {
  public:
  // Конструктор по умолчанию.
- TBinaryTree<Poligon>();
+ TBinaryTree();
  
  void Push(const Poligon& poligon);
  // Метод получения фигуры из контейнера.

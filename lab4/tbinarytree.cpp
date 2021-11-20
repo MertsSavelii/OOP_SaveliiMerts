@@ -17,24 +17,24 @@ void TBinaryTree<Poligon>::Push(const Poligon& octagon) {
     }
     while (curr)
     {
-        if (curr->get_octagon() == octagon)
+        if (curr->get_poligon() == octagon)
         {
             curr->set_count_fig(curr->get_count_fig() + 1);
             return;
         }
-        if (octagon.Area() < curr->get_octagon().Area())
+        if (octagon.Area() < curr->get_poligon().Area())
             if (curr->get_left() == nullptr)
             {
                 curr->set_left(OctSptr);
                 return;
             }
-        if (octagon.Area() >= curr->get_octagon().Area())
-            if (curr->get_right() == nullptr && !(curr->get_octagon() == octagon))
+        if (octagon.Area() >= curr->get_poligon().Area())
+            if (curr->get_right() == nullptr && !(curr->get_poligon() == octagon))
             {
                 curr->set_right(OctSptr);
                 return;
             }
-        if (curr->get_octagon().Area() > octagon.Area())
+        if (curr->get_poligon().Area() > octagon.Area())
             curr = curr->get_left();
         else
             curr = curr->get_right();
@@ -46,14 +46,14 @@ const Poligon& TBinaryTree<Poligon>::GetItemNotLess(double area) {
     SPTR(TreeElem<Poligon>) curr = t_root;
     while (curr)
     {
-        if (area == curr->get_octagon().Area()) 
-            return curr->get_octagon();
-        if (area < curr->get_octagon().Area())
+        if (area == curr->get_poligon().Area()) 
+            return curr->get_poligon();
+        if (area < curr->get_poligon().Area())
         {
             curr = curr->get_left();
             continue;
         }
-        if (area >= curr->get_octagon().Area())
+        if (area >= curr->get_poligon().Area())
         {
             curr = curr->get_right();
             continue;
@@ -69,14 +69,14 @@ size_t TBinaryTree<Poligon>::Count(const Poligon& octagon) {
     
     while (curr)
     {
-        if (curr->get_octagon() == octagon)
+        if (curr->get_poligon() == octagon)
             count = curr->get_count_fig();
-        if (octagon.Area() < curr->get_octagon().Area())
+        if (octagon.Area() < curr->get_poligon().Area())
         {
             curr = curr->get_left();
             continue;
         }
-        if (octagon.Area() >= curr->get_octagon().Area())
+        if (octagon.Area() >= curr->get_poligon().Area())
         {
             curr = curr->get_right();
             continue;
@@ -130,7 +130,7 @@ void Pop_Root_of_Subtree(SPTR(TreeElem<Poligon>) curr, SPTR(TreeElem<Poligon>) p
         replace = replace->get_right();
     }
 
-    curr->set_octagon(replace->get_octagon());
+    curr->set_poligon(replace->get_poligon());
     curr->set_count_fig(replace->get_count_fig());
     
     if (rep_parent->get_left() == replace)
@@ -145,10 +145,10 @@ void TBinaryTree<Poligon>::Pop(const Poligon& octagon) {
     SPTR(TreeElem<Poligon>) curr = t_root;
     SPTR(TreeElem<Poligon>) parent = nullptr;
 
-    while (curr && curr->get_octagon() != octagon)
+    while (curr && curr->get_poligon() != octagon)
     {
         parent = curr;
-        if (curr->get_octagon().Area() > octagon.Area())
+        if (curr->get_poligon().Area() > octagon.Area())
             curr = curr->get_left();
         else
             curr = curr->get_right();
@@ -188,8 +188,8 @@ template <class Poligon>
 void Tree_out (std::ostream& os, SPTR(TreeElem<Poligon>) curr) {
     if (curr)
     {
-        if(curr->get_octagon().Area() >= 0) 
-            os << curr->get_count_fig() << "*" << curr->get_octagon().Area();
+        if(curr->get_poligon().Area() >= 0) 
+            os << curr->get_count_fig() << "*" << curr->get_poligon().Area();
         if(curr->get_left() || curr->get_right()) 
         {
             os << ": [";
@@ -209,9 +209,6 @@ std::ostream& operator<<(std::ostream& os, const TBinaryTree<A>& tree) {
     Tree_out(os, curr);
     return os;
 }
-
-
-
 
 template <class Poligon>
 void recursive_clear(SPTR(TreeElem<Poligon>) curr){
@@ -239,3 +236,7 @@ void TBinaryTree<Poligon>::Clear() {
 template <class Poligon>
 TBinaryTree<Poligon>::~TBinaryTree() {
 }
+
+#include "octagon.h"
+template class TBinaryTree<Octagon>;
+template std::ostream& operator<<(std::ostream& os, const TBinaryTree<Octagon>& stac);

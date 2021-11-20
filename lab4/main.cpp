@@ -13,11 +13,11 @@ int main()
     }
     
     std::cout << tree << std::endl;
-    //a = tree.GetItemNotLess(b->Area());
-    //std::cout << *a << std::endl;
-    //std::cout << tree.Count(a) << std::endl;
-    //tree.Pop(a);
-    //tree.Pop(a);
+    //octi[1] = tree.GetItemNotLess(octi[2].Area());
+    //std::cout << octi[1] << std::endl;
+    //std::cout << tree.Count(octi[0]) << std::endl;
+    //tree.Pop(octi[0]);
+    //tree.Pop(octi[0]);
     //std::cout << tree << std::endl;
     //tree.Clear();
     //std::cout << tree << std::endl;

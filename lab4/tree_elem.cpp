@@ -55,3 +55,6 @@ void TreeElem<Poligon>::set_right(SPTR(TreeElem<Poligon>) to_right) {
 template <class Poligon>
 TreeElem<Poligon>::~TreeElem() {
 }
+
+#include "octagon.h"
+template class TreeElem<Octagon>;

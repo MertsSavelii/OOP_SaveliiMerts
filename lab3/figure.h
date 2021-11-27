@@ -5,9 +5,10 @@
 
 class Figure {
 public:
-    size_t VertexesNumber();
-    double Area();
-    ~Figure() {};
+    virtual size_t VertexesNumber() = 0;
+    virtual void Print(std::ostream& os) = 0;
+    virtual double Area() = 0;
+    virtual ~Figure() {};
 };
 
-#endif 
+#endif // FIGURE_H

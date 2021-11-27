@@ -4,20 +4,21 @@
 
 int main()
 {
-    Octagon a[8];
+    Octagon octi[8];
     TBinaryTree tree;
     for (int i = 0; i < 8; i++)
     {
-        std::cin>>a[i];
-        tree.Push(a[i]);
+        std::cin>>octi[i];
+        tree.Push(octi[i]);
     }
     
     std::cout << tree << std::endl;
-    a[0] = tree.GetItemNotLess(125);
-    //std::cout << tree.Count(a[2]) << std::endl;
-    //tree.Pop(a[1]);
-    //tree.Pop(a[1]);
-    //std::cout << tree << std::endl;
+    octi[5] = tree.GetItemNotLess(octi[1].Area());
+    std::cout << octi[5] << std::endl;
+    std::cout << tree.Count(octi[0]) << std::endl;
+    tree.Pop(octi[0]);
+    tree.Pop(octi[0]);
+    std::cout << tree << std::endl;
     tree.Clear();
     std::cout << tree << std::endl;
     if (tree.Empty())

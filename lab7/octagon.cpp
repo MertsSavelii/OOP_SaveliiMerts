@@ -1,4 +1,4 @@
-#include "octagon.h"
+#include "octagon.hpp"
 
 #include <cmath>
 

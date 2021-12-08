@@ -3,8 +3,8 @@
 
 #include <iostream>
 
-#include "figure.h"
-#include "point.h"
+#include "figure.hpp"
+#include "point.hpp"
 
 class Octagon : public Figure {
 public:

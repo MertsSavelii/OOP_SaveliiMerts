@@ -1,5 +1,5 @@
 build:
-	g++ -pedantic -g main.cpp point.cpp octagon.cpp -o main
+	g++ -pedantic -g main.cpp -o main
 
 clean:
 	rm main

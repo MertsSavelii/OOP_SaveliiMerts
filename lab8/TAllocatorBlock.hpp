@@ -1,57 +1,24 @@
-#ifndef TALLOCATORBLOCK_H
-#define TALLOCATORBLOCK_H
+#ifndef TALLOCATIONBLOCK_H
+#define TALLOCATIONBLOCK_H
 
+#include <iostream>
+#include <cstdlib>
 #include "TLinkedList.hpp"
-#include <memory>
 
-class TAllocatorBlock {
-    public:
-        TAllocatorBlock(const size_t& size, const size_t count){
-            this->size = size;
-            for(int i = 0; i < count; ++i){
-                unused_blocks.InsertLast(malloc(size));
-            }
-        }
-        void* Allocate(const size_t& size){
-            if(size != this->size){
-                std::cout << "Error\n";
-            }
-            if(unused_blocks.Length()){
-                for(int i = 0; i < 5; ++i){
-                    unused_blocks.InsertLast(malloc(size));
-                }
-            }
-            void* tmp = unused_blocks.GetItem(1);
-            used_blocks.InsertLast(unused_blocks.GetItem(1));
-            unused_blocks.Remove(0);
-            return tmp;
-        }
-        void Deallocate(void* ptr){
-            unused_blocks.InsertLast(ptr);
-        }
-    ~TAllocatorBlock(){
-        while(used_blocks.Length()){
-            try{
-                free(used_blocks.GetItem(1));
-                used_blocks.Remove(0);
-            } catch(...){
-                used_blocks.Remove(0);
-            }
-        }
-        while(unused_blocks.Length()){
-            try{
-                free(unused_blocks.GetItem(1));
-                unused_blocks.Remove(0);
-            } catch(...){
-                unused_blocks.Remove(0);
-            }
-        }
-    }
+class TAllocationBlock {
+public:
+    TAllocationBlock(size_t size, size_t count);
 
-    private:
-        size_t size;
-        TLinkedList <void*> used_blocks;
-        TLinkedList <void*> unused_blocks;
+    void *Allocate();
+    void Deallocate(void *ptr);
+    bool Empty();
+    size_t Size();
+
+    virtual ~TAllocationBlock();
+
+private:
+    char *used;
+    TLinkedList2 unused;
 };
 
-#endif
+#endif //TALLOCATIONBLOCK_H

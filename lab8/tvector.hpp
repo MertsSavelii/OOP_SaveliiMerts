@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include "iterator.hpp"
-#include "TAllocatorBlock.hpp"
 #include <memory>
 #define SPTR(T) std::shared_ptr<T>
 
@@ -44,14 +43,10 @@ public:
     Iterator<Polygon> end(){
         return Iterator<Polygon>(data + size);
     }
-
-    void * operator new (size_t size);
-    void operator delete(void *p);
-
+    
     // Деструктор
     virtual ~TVector();
 private:
-    static TAllocatorBlock vectorAllocator;
     int size;
     SPTR(Polygon)* data;
 };
@@ -135,18 +130,6 @@ void TVector<Polygon>::Clear(){
 	delete[] data;
     size = 1;
     data = new SPTR(Polygon)[size];
-}
-
-template <class Polygon>
-void * TVector<Polygon>::operator new(size_t size)
-{
-    return vectorAllocator.Allocate(100);
-}
-
-template <class Polygon>
-void TVector<Polygon>::operator delete(void * p)
-{
-    vectorAllocator.Deallocate(p);
 }
 
 template <class Polygon>
